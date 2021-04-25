@@ -23,6 +23,12 @@
     {{#morgan}}
     "morgan": "^1.10.0",
     {{/morgan}}
+    {{#if_eq database "mongoose"}}
+    "mongoose": "^5.12.5",
+    {{/if_eq}}
+    {{#if_eq database "mysql"}}
+    "mysql": "^2.18.1",
+    {{/if_eq}}
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express-import-routes": "^0.0.2-b1"
