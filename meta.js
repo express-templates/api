@@ -68,6 +68,10 @@ module.exports = {
       type: "confirm",
       message: "Install cookie-parser?",
     },
+    axios: {
+      type: "confirm",
+      message: "Install axios?",
+    },
     useDatabase: {
       type: "confirm",
       message: "Use database?",
@@ -156,6 +160,7 @@ module.exports = {
   },
   filters: {
     "db.js": "useDatabase",
+    "axios.js": "axios"
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
