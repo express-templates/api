@@ -71,7 +71,7 @@ module.exports = {
     useDatabase: {
       type: "confirm",
       message: "Use database?",
-      default: "no",
+      default: false,
     },
     database: {
       when: "useDatabase",
@@ -94,8 +94,7 @@ module.exports = {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: "Database name?",
-      default: "{{ name }}",
+      message: "Database name?"
     },
     DB_HOST: {
       when: "useDatabase",
@@ -115,7 +114,7 @@ module.exports = {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: 'Password database "{{DB_USER}}"?',
+      message: 'Password database?',
       default: "",
     },
     DB_PORT: {
@@ -127,7 +126,7 @@ module.exports = {
     },
     DB_TIMEOUT: {
       when: "useDatabase",
-      type: "string",
+      type: "number",
       required: true,
       message: "Timeout query database?",
       default: 60000,

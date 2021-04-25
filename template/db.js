@@ -1,7 +1,7 @@
 {{#if_eq database "mysql"}}
 const mysql = require("mysql");
 {{/if_eq}}
-{{if_eq database "mongodb"}}
+{{#if_eq database "mongodb"}}
 const mongoose = require("mongoose")
 {{/if_eq}}
 
