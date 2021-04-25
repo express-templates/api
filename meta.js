@@ -71,6 +71,7 @@ module.exports = {
     axios: {
       type: "confirm",
       message: "Install axios?",
+      default: false
     },
     useDatabase: {
       type: "confirm",
