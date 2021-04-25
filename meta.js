@@ -27,6 +27,13 @@ module.exports = {
 
       return options.inverse(this);
     },
+    if_xor(v1, v2, v3, options) {
+      if (v1 || v2 === v3) {
+        return options.fn(this);
+      }
+
+      return options.inverse(this);
+    },
     template_version() {
       return templateVersion;
     },
@@ -56,22 +63,48 @@ module.exports = {
       type: "confirm",
       message: "Install helmet?",
     },
+    extraction: {
+      type: "list",
+      message: "Pick an mode API",
+      choices: [
+        {
+          name: "Data extraction API",
+          value: "extraction",
+          short: "extraction",
+        },
+        {
+          name: "Normal API",
+          value: "normal",
+          short: "normal",
+        },
+      ],
+    },
     cors: {
+      when: "extraction !== 'extraction'",
       type: "confirm",
       message: "Install cors?",
     },
     bodyparser: {
+      when: "extraction !== 'extraction'",
       type: "confirm",
       message: "Install body-parser?",
     },
     cookieparser: {
+      when: "extraction !== 'extraction'",
       type: "confirm",
       message: "Install cookie-parser?",
     },
     axios: {
+      when: "extraction !== 'extraction'",
       type: "confirm",
       message: "Install axios?",
-      default: false
+      default: false,
+    },
+    jsdom: {
+      when: "extraction !== 'extraction'",
+      type: "confirm",
+      message: "Install jsdom?",
+      default: false,
     },
     useDatabase: {
       type: "confirm",
@@ -99,7 +132,7 @@ module.exports = {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: "Database name?"
+      message: "Database name?",
     },
     DB_HOST: {
       when: "useDatabase",
@@ -119,7 +152,7 @@ module.exports = {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: 'Password database?',
+      message: "Password database?",
       default: "",
     },
     DB_PORT: {
@@ -161,7 +194,8 @@ module.exports = {
   },
   filters: {
     "db.js": "useDatabase",
-    "axios.js": "axios"
+    "axios.js": "axios",
+    "utils/index.js": "jsdom",
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;

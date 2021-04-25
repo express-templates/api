@@ -5,12 +5,12 @@ const morgan = require("morgan");
 {{#helmet}}
 const helmet = require("helmet");
 {{/helmet}}
-{{#cors}}
+{{#if_xor cors extraction "extraction"}}
 const cors = require("cors");
-{{/cors}}
-{{#bodyparser}}
+{{/if_xor}}
+{{#if_xor bodyparser extraction "extraction"}}
 const bodyParser = require("body-parser")
-{{/bodyparser}}
+{{/if_xor}}
 const routes = require("express-import-routes")
 
 {{#if_eq database "mongodb"}}
@@ -34,16 +34,16 @@ app.use(morgan("dev"));
 {{#helmet}}
 app.use(helmet());
 {{/helmet}}
-{{#cors}}
+{{#if_xor cors extraction "extraction"}}
 app.use(cors());
-{{/cors}}
-{{#cookieparser}}
+{{/if_xor}}
+{{#if_xor cookieparser extraction "extraction"}}
 app.use(require("cookie-parser")());
-{{/cookieparser}}
-{{#bodyparser}}
+{{/if_xor}}
+{{#if_xor bodyparser extraction "extraction"}}
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-{{/bodyparser}}
+{{/if_xor}}
 app.use(routes())
 
 const PORT = process.env.PORT || 3000;
