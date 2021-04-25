@@ -20,6 +20,13 @@ module.exports = {
 
       return options.inverse(this);
     },
+    exists(value, options) {
+      if (value) {
+        return options.fn(this);
+      }
+
+      return options.inverse(this);
+    },
     template_version() {
       return templateVersion;
     },
@@ -108,21 +115,21 @@ module.exports = {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: "Password database login to {{DB_USER}} name?",
+      message: 'Password database "{{DB_USER}}"?',
       default: "",
     },
     DB_PORT: {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: "Port connect to database?",
+      message: "Port database?",
       default: "3306",
     },
     DB_TIMEOUT: {
       when: "useDatabase",
       type: "string",
       required: true,
-      message: "Timeout ?",
+      message: "Timeout query database?",
       default: 60000,
     },
     autoInstall: {
