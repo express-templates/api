@@ -68,14 +68,14 @@ module.exports = {
       message: "Pick an mode API",
       choices: [
         {
-          name: "Data extraction API",
-          value: "extraction",
-          short: "extraction",
-        },
-        {
           name: "Normal API",
           value: "normal",
           short: "normal",
+        },
+        {
+          name: "Data extraction API",
+          value: "extraction",
+          short: "extraction",
         },
       ],
     },
@@ -194,8 +194,8 @@ module.exports = {
   },
   filters: {
     "db.js": "useDatabase",
-    "axios.js": "axios",
-    "utils/index.js": "jsdom",
+    "axios.js": "extraction === 'extraction' || axios",
+    "utils/index.js": "extraction === 'extraction' || jsdom",
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
