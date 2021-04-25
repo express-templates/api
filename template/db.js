@@ -86,7 +86,7 @@ exports.query = (options, params) => {
   });
 };
 {{/if_eq}}
-{{if_eq database "mongodb"}}
+{{#if_eq database "mongodb"}}
 exports.connect = async (options) => {
    return await mongoose.connect(
      `mongodb://{{DB_USER}}:{{DB_PASSWORD}}@{{DB_HOST}}:{{DB_PORT}}/{{DB_DATABASE}}`,
