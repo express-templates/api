@@ -53,20 +53,92 @@ module.exports = {
       type: "confirm",
       message: "Install cors?",
     },
+    bodyparser: {
+      type: "confirm",
+      message: "Install body-parser?",
+    },
+    cookieparser: {
+      type: "confirm",
+      message: "Install cookie-parser?",
+    },
+    useDatabase: {
+      type: "confirm",
+      message: "Use database?",
+      default: "no",
+    },
+    database: {
+      when: "useDatabase",
+      type: "list",
+      message: "Pick an database preset",
+      choices: [
+        {
+          name: "MySQL",
+          value: "mysql",
+          short: "MySQL",
+        },
+        {
+          name: "MongoDB",
+          value: "mongodb",
+          short: "MongoDB",
+        },
+      ],
+    },
+    DB_DATABASE: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Database name?",
+      default: "{{ name }}",
+    },
+    DB_HOST: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Host database name?",
+      default: "localhost",
+    },
+    DB_USER: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Username database name?",
+      default: "root",
+    },
+    DB_PASSWORD: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Password database login to {{DB_USER}} name?",
+      default: "",
+    },
+    DB_PORT: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Port connect to database?",
+      default: "3306",
+    },
+    DB_TIMEOUT: {
+      when: "useDatabase",
+      type: "string",
+      required: true,
+      message: "Timeout ?",
+      default: 60000,
+    },
     autoInstall: {
       type: "list",
       message:
         "Should we run `npm install` for you after the project has been created? (recommended)",
       choices: [
         {
-          name: "Yes, use NPM",
-          value: "npm",
-          short: "npm",
-        },
-        {
           name: "Yes, use Yarn",
           value: "yarn",
           short: "yarn",
+        },
+        {
+          name: "Yes, use NPM",
+          value: "npm",
+          short: "npm",
         },
         {
           name: "No, I will handle that myself",
@@ -76,7 +148,9 @@ module.exports = {
       ],
     },
   },
-  filters: {},
+  filters: {
+    "db.js": "useDatabase",
+  },
   complete: function (data, { chalk }) {
     const green = chalk.green;
 

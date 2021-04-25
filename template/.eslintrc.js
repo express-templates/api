@@ -9,5 +9,7 @@ module.exports = {
         "ecmaVersion": 12
     },
     "rules": {
+        "quotes": ["error", "double"],
+        "no-used-vers": ["error"]
     }
 };
