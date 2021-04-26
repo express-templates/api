@@ -6,7 +6,7 @@ exports.loadDOM = async (url, isDocument) => {
     return new JSDOM(url).window.document;
   }
 
-  const { data } = axios.get(url);
+  const { data } = await axios.get(url);
 
   return new JSDOM(data).window.document;
 };
