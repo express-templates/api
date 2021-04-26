@@ -10,3 +10,11 @@ exports.loadDOM = async (url, isDocument) => {
 
    return new JSDOM(data).window.document
 }
+
+exports.trim = value => {
+   if ( value == null ) {
+      return ""
+   }
+
+   return (value + "").replace(/^\s+|\s+$/g, "")
+}

@@ -12,6 +12,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser")
 {{/if_xor}}
 const routes = require("express-import-routes")
+{{#if_xor axios extraction "extraction"}}
+const alias = require("module-alias")
+alias.addAlias("@axios", `${__dirname}/axios.js`)
+{{/if_xor}}
 
 {{#if_eq database "mongodb"}}
 require("./db")

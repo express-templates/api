@@ -32,6 +32,7 @@
     {{#if_xor axios extraction "extraction"}}
     "axios": "^0.21.1",
     "axios-cache-adapter": "^2.7.3",
+    "module-alias": "^2.2.2",
     {{/if_xor}}
     {{#if_xor jsdom extraction "extraction"}}
     "jsdom": "^16.5.3",
