@@ -1,7 +1,7 @@
 import axios from "../axios";
 import { JSDOM } from "jsdom";
 
-export const loadDOM = async (url: string|JSON, isDocument: boolean) => {
+export const loadDOM = async (url: string, isDocument: boolean) => {
   if (typeof url === "object" || isDocument) {
     return new JSDOM(url).window.document;
   }

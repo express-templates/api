@@ -68,7 +68,7 @@ exports.query = async (options, params) => {
         if (error) {
           reject(error);
         } else {
-          if (arguments.length >= 3) {
+          if (fields !== undefined) {
             resolve({
               results: [...results],
               fields,

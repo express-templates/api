@@ -1,6 +1,6 @@
 {{#if_eq database "mysql"}}
 import mysql from "mysql";
-import { Connection, Query, QueryOptions } from "@types/mysql";
+import { Connection, Query, QueryOptions, MysqlError } from "@types/mysql";
 {{/if_eq}}
 {{#if_eq database "mongodb"}}
 import mongoose from "mongoose";
@@ -34,7 +34,7 @@ const _connect: Connection = mysql.createConnection({
 
 export const connect = (): Promise<Connection> => {
   return new Promise((resolve, reject): void => {
-    _connect.connect((error): void => {
+    _connect.connect((error: MysqlError): void => {
       if (error) {
         reject(error);
       } else {
@@ -46,7 +46,7 @@ export const connect = (): Promise<Connection> => {
 
 export const close = (connect: Connection): Promise<Connection> => {
   return new Promise((resolve, reject) => {
-    connect.end((error): void => {
+    connect.end((error: MysqlError): void => {
       if (error) {
         reject(error);
       } else {
@@ -69,11 +69,11 @@ export const query = async (options: string|QueryOptions|Query, params?: any): Q
         timeout: process.env.DB_TIMEOUT,
       }),
       params,
-      (error, results, fields) => {
+      (error: MysqlError, results: any, fields: any) => {
         if (error) {
           reject(error);
         } else {
-          if (arguments.length >= 3) {
+          if (fields !== undefined) {
             resolve({
               results: [...results],
               fields,

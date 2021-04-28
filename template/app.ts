@@ -18,8 +18,8 @@ import routes from "express-import-routes";
 {{#if_xor axios extraction "extraction"}}
 import alias from "module-alias";
 {{/if_xor}}
-{{#if_eq database "mongodb"}}
 import dotenv from "dotenv"
+{{#if_eq database "mongodb"}}
 import { connect } from "./db"
 {{/if_eq}}
 
