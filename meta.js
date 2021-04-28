@@ -197,9 +197,9 @@ module.exports = {
     },
   },
   filters: {
-    "db.js": "useDatabase",
-    "axios.js": "extraction === 'extraction' || axios",
-    "utils/index.js": "extraction === 'extraction' || jsdom",
+    "db.*": "useDatabase",
+    "axios.*": "extraction === 'extraction' || axios",
+    "utils/index.*": "extraction === 'extraction' || jsdom",
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
