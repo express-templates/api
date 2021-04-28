@@ -29,7 +29,7 @@ alias.addAlias("@axios", `${__dirname}/axios.js`);
 
 {{#if_eq database "mongodb"}}
 connect()
-  .then((error) => {
+  .then((error: any): void => {
     if (error) {
       console.error(error);
     } else {
@@ -59,13 +59,13 @@ app.use(bodyParser.json());
 {{/if_xor}}
 app.use(routes())
 
-const PORT: number = process.env.PORT || 3000;
+const PORT: number = +(process.env.PORT || 3000);
 
-app.listen(PORT, (err) => {
+app.listen(PORT, (err?: any): void => {
   if (err) {
     console.error(err);
   } else {
-    console.log(`App it running on port ${PORT}`);
+    console.log(`⚡️App it running on port ${PORT}`);
   }
 });
 

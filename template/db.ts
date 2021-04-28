@@ -1,6 +1,11 @@
 {{#if_eq database "mysql"}}
 import mysql from "mysql";
 import { Connection, Query, QueryOptions, MysqlError } from "@types/mysql";
+
+interface QueryResult {
+  results?: Array<any>;
+  fields: any;
+}
 {{/if_eq}}
 {{#if_eq database "mongodb"}}
 import mongoose from "mongoose";
@@ -10,7 +15,7 @@ import { MongoClientOptions, MongoClient } from "@types/mongoose";
 function mergeOptions(options: string|object, defaults: {
   timeout?: number|string;
   [propName: string]: any
-}): object {
+}): QueryOptions {
    if (options === null || typeof options !== "object") {
      options = {
        sql: options,
@@ -20,7 +25,7 @@ function mergeOptions(options: string|object, defaults: {
    return {
      ...defaults,
      ...options,
-   };
+   } as QueryOptions;
  }
 
 {{#if_eq database "mysql"}}
@@ -29,7 +34,7 @@ const _connect: Connection = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  port: process.env.DB_PORT,
+  port: +(process.env.DB_PORT || 3306),
 });
 
 export const connect = (): Promise<Connection> => {
@@ -38,15 +43,15 @@ export const connect = (): Promise<Connection> => {
       if (error) {
         reject(error);
       } else {
-        resolve(connect);
+        resolve(_connect);
       }
     });
   });
 };
 
-export const close = (connect: Connection): Promise<Connection> => {
+export const close = (connect: Connection): Promise<Connection|void> => {
   return new Promise((resolve, reject) => {
-    connect.end((error: MysqlError): void => {
+    connect.end((error?: MysqlError|undefined): void => {
       if (error) {
         reject(error);
       } else {
@@ -60,7 +65,7 @@ export const escape = (sql: string): string => {
   return _connect.escape(sql);
 };
 
-export const query = async (options: string|QueryOptions|Query, params?: any): Query => {
+export const query = async (options: string|QueryOptions|Query, params?: any): Promise<QueryResult> => {
   const db: Connection = await connect();
 
   return new Promise((resolve, reject): void => {
@@ -69,7 +74,7 @@ export const query = async (options: string|QueryOptions|Query, params?: any): Q
         timeout: process.env.DB_TIMEOUT,
       }),
       params,
-      (error: MysqlError, results: any, fields: any) => {
+      (error: MysqlError|null, results: any, fields: any): void => {
         if (error) {
           reject(error);
         } else {

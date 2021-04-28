@@ -5,6 +5,11 @@
     "rootDir": "./",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "strict": true
+    "strict": true,
+    "baseUrl": "typings",
+    "typeRoots": ["typings"]
+  },
+  "typeAcquisition": {
+    "include": []
   }
 }

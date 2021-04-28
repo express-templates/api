@@ -5,12 +5,12 @@
   "main": "app.js",
   "scripts": {
     {{#ts}}
-    "start": "ts-node app.js",
+    "start": "ts-node app.ts",
     {{/ts}}
     {{#if_eq ts false}}
     "start": "node app.js",
     {{/if_eq}}
-    "dev": "nodemon appp.js",
+    "dev": "nodemon app.ts",
     {{#ts}}
     "build": "tsc --project ./",
     {{/ts}}
@@ -51,7 +51,7 @@
     {{#if_xor cookieparser extraction "extraction"}}
     "cookie-parser": "^1.4.5",
     {{/if_xor}}
-    "express-import-routes": "^0.0.2-b1"
+    "express-import-routes": "^0.0.2-b2"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
