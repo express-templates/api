@@ -202,7 +202,8 @@ module.exports = {
     "utils/index.js": "extraction === 'extraction' || jsdom",
     "tsconfig.json": "ts",
     "*.js": "ts === false",
-    "*.ts": "ts"
+    "**/*.js": "ts === false",
+    "**/*.ts": "ts"
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
