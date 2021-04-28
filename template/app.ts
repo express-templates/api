@@ -1,25 +1,34 @@
-const express = require("express");
+import express, { Application } from "express";
 {{#morgan}}
-const morgan = require("morgan");
+import morgan from "morgan";
 {{/morgan}}
 {{#helmet}}
-const helmet = require("helmet");
+import helmet from "helmet";
 {{/helmet}}
 {{#if_xor cors extraction "extraction"}}
-const cors = require("cors");
+import cors from "cors";
 {{/if_xor}}
 {{#if_xor bodyparser extraction "extraction"}}
-const bodyParser = require("body-parser")
+import bodyParser from "body-parser";
 {{/if_xor}}
-const routes = require("express-import-routes")
+{{#if_xor cookieparser extraction "extraction"}}
+import cookieParser from "cookie-parser"
+{{/if_xor}}
+import routes from "express-import-routes";
 {{#if_xor axios extraction "extraction"}}
-const alias = require("module-alias")
-alias.addAlias("@axios", `${__dirname}/axios.js`)
+import alias from "module-alias";
+{{/if_xor}}
+{{#if_eq database "mongodb"}}
+import dotenv from "dotenv"
+import { connect } from "./db"
+{{/if_eq}}
+
+{{#if_xor axios extraction "extraction"}}
+alias.addAlias("@axios", `${__dirname}/axios.js`);
 {{/if_xor}}
 
 {{#if_eq database "mongodb"}}
-require("./db")
-  .connect()
+connect()
   .then((error) => {
     if (error) {
       console.error(error);
@@ -28,9 +37,9 @@ require("./db")
     }
   });
 {{/if_eq}}
-require("dotenv").config();
+dotenv.config();
 
-const app = express();
+const app: Application = express();
 
 {{#morgan}}
 app.use(morgan("dev"));
@@ -42,7 +51,7 @@ app.use(helmet());
 app.use(cors());
 {{/if_xor}}
 {{#if_xor cookieparser extraction "extraction"}}
-app.use(require("cookie-parser")());
+app.use(cookieParser());
 {{/if_xor}}
 {{#if_xor bodyparser extraction "extraction"}}
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -50,7 +59,7 @@ app.use(bodyParser.json());
 {{/if_xor}}
 app.use(routes())
 
-const PORT = process.env.PORT || 3000;
+const PORT: number = process.env.PORT || 3000;
 
 app.listen(PORT, (err) => {
   if (err) {
@@ -60,4 +69,4 @@ app.listen(PORT, (err) => {
   }
 });
 
-module.exports = app
+export default app

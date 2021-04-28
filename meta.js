@@ -55,6 +55,10 @@ module.exports = {
       type: "string",
       message: "Author",
     },
+    ts: {
+      type: "confirm",
+      message: "Use TypeScript?",
+    },
     morgan: {
       type: "confirm",
       message: "Install morgan?",
@@ -196,6 +200,9 @@ module.exports = {
     "db.js": "useDatabase",
     "axios.js": "extraction === 'extraction' || axios",
     "utils/index.js": "extraction === 'extraction' || jsdom",
+    "tsconfig.json": "ts",
+    "*.js": "ts === false",
+    "*.ts": "ts"
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;

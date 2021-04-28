@@ -1,11 +1,16 @@
 {{#if_eq database "mysql"}}
-const mysql = require("mysql");
+import mysql from "mysql";
+import { Connection, Query, QueryOptions } from "@types/mysql";
 {{/if_eq}}
 {{#if_eq database "mongodb"}}
-const mongoose = require("mongoose")
+import mongoose from "mongoose";
+import { MongoClientOptions, MongoClient } from "@types/mongoose";
 {{/if_eq}}
 
-function mergeOptions(options, defaults) {
+function mergeOptions(options: string|object, defaults: {
+  timeout?: number|string;
+  [propName: string]: any
+}): object {
    if (options === null || typeof options !== "object") {
      options = {
        sql: options,
@@ -19,7 +24,7 @@ function mergeOptions(options, defaults) {
  }
 
 {{#if_eq database "mysql"}}
-const connect = mysql.createConnection({
+const _connect: Connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -27,9 +32,9 @@ const connect = mysql.createConnection({
   port: process.env.DB_PORT,
 });
 
-exports.connect = () => {
-  return new Promise((resolve, reject) => {
-    connect.connect((error) => {
+export const connect = (): Promise<Connection> => {
+  return new Promise((resolve, reject): void => {
+    _connect.connect((error): void => {
       if (error) {
         reject(error);
       } else {
@@ -39,9 +44,9 @@ exports.connect = () => {
   });
 };
 
-exports.close = (connect) => {
+export const close = (connect: Connection): Promise<Connection> => {
   return new Promise((resolve, reject) => {
-    connect.end((error) => {
+    connect.end((error): void => {
       if (error) {
         reject(error);
       } else {
@@ -51,14 +56,14 @@ exports.close = (connect) => {
   });
 };
 
-exports.escape = (sql) => {
-  return connect.escape(sql);
+export const escape = (sql: string): string => {
+  return _connect.escape(sql);
 };
 
-exports.query = async (options, params) => {
-  const db = await exports.connect();
+export const query = async (options: string|QueryOptions|Query, params?: any): Query => {
+  const db: Connection = await connect();
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject): void => {
     db.query(
       mergeOptions(options, {
         timeout: process.env.DB_TIMEOUT,
@@ -80,14 +85,14 @@ exports.query = async (options, params) => {
           }
         }
 
-        exports.close(db);
+        close(db);
       }
     );
   });
 };
 {{/if_eq}}
 {{#if_eq database "mongodb"}}
-exports.connect = async (options) => {
+export const connect = async (options?: MongoClientOptions): MongoClient => {
    return await mongoose.connect(
      `mongodb://{{DB_USER}}:{{DB_PASSWORD}}@{{DB_HOST}}:{{DB_PORT}}/{{DB_DATABASE}}`,
      mergeOptions(options, {
