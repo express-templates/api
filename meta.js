@@ -201,7 +201,6 @@ module.exports = {
     "axios.js": "extraction === 'extraction' || axios",
     "utils/index.js": "extraction === 'extraction' || jsdom",
     "tsconfig.json": "ts",
-    "*.js": "ts === false",
     "**/*.js": "ts === false",
     "**/*.ts": "ts"
   },
