@@ -13,7 +13,7 @@
     "dev": "nodemon appp.js",
     {{#ts}}
     "build": "tsc --project ./",
-    {{{/ts}}}
+    {{/ts}}
     "lint": "eslint --fix",
     "test": "mocha --exit"
   },
