@@ -1,6 +1,6 @@
 {{#if_eq database "mysql"}}
 import mysql from "mysql";
-import { Connection, Query, QueryOptions, MysqlError } from "@types/mysql";
+import { Connection, Query, QueryOptions, MysqlError } from "mysql";
 
 interface QueryResult {
   results?: Array<any>;
@@ -9,7 +9,7 @@ interface QueryResult {
 {{/if_eq}}
 {{#if_eq database "mongodb"}}
 import mongoose from "mongoose";
-import { MongoClientOptions, MongoClient } from "@types/mongoose";
+import { MongoClientOptions, MongoClient } from "mongoose";
 {{/if_eq}}
 
 function mergeOptions(options: string|object, defaults: {
