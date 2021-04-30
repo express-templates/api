@@ -52,7 +52,7 @@
     {{#if_xor cookieparser extraction "extraction"}}
     "cookie-parser": "^1.4.5",
     {{/if_xor}}
-    "express-import-routes": "^0.0.2-b3"
+    "express-import-routes": "^0.0.2-b4"
   },
   "devDependencies": {
     "eslint": "^7.18.0",
