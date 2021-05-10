@@ -19,7 +19,7 @@ import routes from "express-import-routes";
 import alias from "module-alias";
 {{/if_xor}}
 import dotenv from "dotenv"
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 import { connect } from "./db"
 {{/if_eq}}
 
@@ -27,7 +27,7 @@ import { connect } from "./db"
 alias.addAlias("@axios", `${__dirname}/axios.js`);
 {{/if_xor}}
 
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 connect()
   .then((error: any): void => {
     if (error) {

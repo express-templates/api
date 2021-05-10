@@ -17,7 +17,7 @@ const alias = require("module-alias")
 alias.addAlias("@axios", `${__dirname}/axios.js`)
 {{/if_xor}}
 
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 require("./db")
   .connect()
   .then((error) => {

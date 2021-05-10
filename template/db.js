@@ -1,7 +1,7 @@
 {{#if_eq database "mysql"}}
 const mysql = require("mysql");
 {{/if_eq}}
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 const mongoose = require("mongoose")
 {{/if_eq}}
 
@@ -86,7 +86,7 @@ exports.query = async (options, params) => {
   });
 };
 {{/if_eq}}
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 exports.connect = async (options) => {
    return await mongoose.connect(
      `{{ DB_MG_URL }}`,

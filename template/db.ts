@@ -7,7 +7,7 @@ interface QueryResult {
   fields: any;
 }
 {{/if_eq}}
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 import mongoose from "mongoose";
 import { MongoClientOptions, MongoClient } from "mongoose";
 {{/if_eq}}
@@ -15,7 +15,7 @@ import { MongoClientOptions, MongoClient } from "mongoose";
 function mergeOptions(options: string|object, defaults: {
   timeout?: number|string;
   [propName: string]: any
-}): QueryOptions {
+}): Object {
    if (options === null || typeof options !== "object") {
      options = {
        sql: options,
@@ -25,7 +25,7 @@ function mergeOptions(options: string|object, defaults: {
    return {
      ...defaults,
      ...options,
-   } as QueryOptions;
+   } as Object;
  }
 
 {{#if_eq database "mysql"}}
@@ -72,7 +72,7 @@ export const query = async (options: string|QueryOptions|Query, params?: any): P
     db.query(
       mergeOptions(options, {
         timeout: process.env.DB_TIMEOUT,
-      }),
+      }) as QueryOptions,
       params,
       (error: MysqlError|null, results: any, fields: any): void => {
         if (error) {
@@ -96,7 +96,7 @@ export const query = async (options: string|QueryOptions|Query, params?: any): P
   });
 };
 {{/if_eq}}
-{{#if_eq database "mongodb"}}
+{{#if_eq database "mongoose"}}
 export const connect = async (options?: MongoClientOptions): MongoClient => {
    return await mongoose.connect(
      `{{ DB_MG_URL }}`,
