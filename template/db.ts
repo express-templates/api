@@ -99,7 +99,7 @@ export const query = async (options: string|QueryOptions|Query, params?: any): P
 {{#if_eq database "mongodb"}}
 export const connect = async (options?: MongoClientOptions): MongoClient => {
    return await mongoose.connect(
-     `mongodb://{{DB_USER}}:{{DB_PASSWORD}}@{{DB_HOST}}:{{DB_PORT}}/{{DB_DATABASE}}`,
+     `{{ DB_MG_URL }}`,
      mergeOptions(options, {
        useNewUrlParser: true,
        useUnifiedTopology: true,

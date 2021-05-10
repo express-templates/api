@@ -89,7 +89,7 @@ exports.query = async (options, params) => {
 {{#if_eq database "mongodb"}}
 exports.connect = async (options) => {
    return await mongoose.connect(
-     `mongodb://{{DB_USER}}:{{DB_PASSWORD}}@{{DB_HOST}}:{{DB_PORT}}/{{DB_DATABASE}}`,
+     `{{ DB_MG_URL }}`,
      mergeOptions(options, {
        useNewUrlParser: true,
        useUnifiedTopology: true,
