@@ -127,7 +127,7 @@ module.exports = {
         },
         {
           name: "MongoDB",
-          value: "mongodb",
+          value: "mongoose",
           short: "MongoDB",
         },
       ],
@@ -203,7 +203,9 @@ module.exports = {
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
-    "typings": "ts"
+    "typings": "ts",
+    "models": "database \"mongoose\"",
+    "schema": "database \"mongoose\""
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
