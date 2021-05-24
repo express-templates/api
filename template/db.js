@@ -85,7 +85,7 @@ exports.query = async (options, params) => {
 const mongoose = require("mongoose")
 
 exports.connect = async () => {
-  return await mongoose.connect(`{{ DB_MG_URL }}/{{ DB_MG_NAME }}`, {
+  return await mongoose.connect("{{ DB_MG_URL }}/{{ DB_MG_NAME }}", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
