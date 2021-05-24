@@ -12,15 +12,16 @@ import cors from "cors";
 import bodyParser from "body-parser";
 {{/if_xor}}
 {{#if_xor cookieparser extraction "extraction"}}
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 {{/if_xor}}
 import routes from "express-import-routes";
 {{#if_xor axios extraction "extraction"}}
 import alias from "module-alias";
 {{/if_xor}}
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 {{#if_eq database "mongoose"}}
-import { connect } from "./db"
+import db from "./db";
+import chalk from "chalk";
 {{/if_eq}}
 
 {{#if_xor axios extraction "extraction"}}
@@ -28,14 +29,9 @@ alias.addAlias("@axios", `${__dirname}/axios.js`);
 {{/if_xor}}
 
 {{#if_eq database "mongoose"}}
-connect()
-  .then((error: any): void => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log("MongoDB connected!");
-    }
-  });
+db.connect().then(() => {
+  console.log(chalk.blue("MongoDB connected!"));
+});
 {{/if_eq}}
 dotenv.config();
 

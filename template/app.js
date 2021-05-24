@@ -9,24 +9,20 @@ const helmet = require("helmet");
 const cors = require("cors");
 {{/if_xor}}
 {{#if_xor bodyparser extraction "extraction"}}
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 {{/if_xor}}
-const routes = require("express-import-routes")
+const routes = require("express-import-routes");
 {{#if_xor axios extraction "extraction"}}
-const alias = require("module-alias")
-alias.addAlias("@axios", `${__dirname}/axios.js`)
+const alias = require("module-alias");
+alias.addAlias("@axios", `${__dirname}/axios.js`);
 {{/if_xor}}
-
 {{#if_eq database "mongoose"}}
-require("./db")
-  .connect()
-  .then((error) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log("MongoDB connected!");
-    }
-  });
+const db = require("./db");
+const chalk = require("chalk");
+
+db.connect().then(() => {
+  console.log(chalk.blue("MongoDB connected!"));
+});
 {{/if_eq}}
 require("dotenv").config();
 

@@ -1,24 +1,19 @@
 {{#if_eq database "mysql"}}
 const mysql = require("mysql");
-{{/if_eq}}
-{{#if_eq database "mongoose"}}
-const mongoose = require("mongoose")
-{{/if_eq}}
 
 function mergeOptions(options, defaults) {
-   if (options === null || typeof options !== "object") {
-     options = {
-       sql: options,
-     };
-   }
- 
-   return {
-     ...defaults,
-     ...options,
-   };
- }
+  if (options === null || typeof options !== "object") {
+    options = {
+      sql: options,
+    };
+  }
 
-{{#if_eq database "mysql"}}
+  return {
+    ...defaults,
+    ...options,
+  };
+}
+
 const connect = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -87,15 +82,14 @@ exports.query = async (options, params) => {
 };
 {{/if_eq}}
 {{#if_eq database "mongoose"}}
-exports.connect = async (options) => {
-   return await mongoose.connect(
-     `{{ DB_MG_URL }}`,
-     mergeOptions(options, {
-       useNewUrlParser: true,
-       useUnifiedTopology: true,
-       useFindAndModify: false,
-       useCreateIndex: true,
-     })
-   );
- }; 
+const mongoose = require("mongoose")
+
+exports.connect = async () => {
+  return await mongoose.connect(`{{ DB_MG_URL }}/{{ DB_MG_NAME }}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
+};
 {{/if_eq}}

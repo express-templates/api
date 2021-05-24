@@ -6,11 +6,6 @@ interface QueryResult {
   results?: Array<any>;
   fields: any;
 }
-{{/if_eq}}
-{{#if_eq database "mongoose"}}
-import mongoose from "mongoose";
-import { MongoClientOptions, MongoClient } from "mongoose";
-{{/if_eq}}
 
 function mergeOptions(options: string|object, defaults: {
   timeout?: number|string;
@@ -28,7 +23,7 @@ function mergeOptions(options: string|object, defaults: {
    } as Object;
  }
 
-{{#if_eq database "mysql"}}
+ 
 const _connect: Connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -94,18 +89,18 @@ export const query = async (options: string|QueryOptions|Query, params?: any): P
       }
     );
   });
-};
+}
 {{/if_eq}}
 {{#if_eq database "mongoose"}}
-export const connect = async (options?: MongoClientOptions): MongoClient => {
-   return await mongoose.connect(
-     `{{ DB_MG_URL }}`,
-     mergeOptions(options, {
-       useNewUrlParser: true,
-       useUnifiedTopology: true,
-       useFindAndModify: false,
-       useCreateIndex: true,
-     })
-   );
- }; 
+import mongoose from "mongoose";
+import { MongoClient } from "mongoose";
+
+export const connect = async (): MongoClient => {
+  return await mongoose.connect(`{{ DB_MG_URL }}/{{ DB_MG_NAME }}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  });
+};
 {{/if_eq}}
