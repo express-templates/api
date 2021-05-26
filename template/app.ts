@@ -1,4 +1,5 @@
-import express, { Application } from "express";
+import express, { Application, NextFunction, Request, Response } from "express";
+import createError from "http-errors";
 {{#morgan}}
 import morgan from "morgan";
 {{/morgan}}
@@ -54,6 +55,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 {{/if_xor}}
 app.use(routes())
+
+// catch 404 and forward to error handler
+app.use((req: Request, res: Response, next: NextFunction): void => {
+  next(createError(404));
+});
+
+// error handler
+app.use((err: any, req: Request, res: Response): void => {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error");
+});
+
 
 const PORT: number = +(process.env.PORT || 3000);
 
