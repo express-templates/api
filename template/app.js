@@ -12,7 +12,7 @@ const cors = require("cors");
 {{#if_xor bodyparser extraction "extraction"}}
 const bodyParser = require("body-parser");
 {{/if_xor}}
-const routes = require("express-import-routes");
+const express_import_routes = require("express-import-routes");
 {{#if_xor axios extraction "extraction"}}
 const alias = require("module-alias");
 alias.addAlias("@axios", `${__dirname}/axios.js`);
@@ -45,7 +45,7 @@ app.use(require("cookie-parser")());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 {{/if_xor}}
-app.use(routes())
+app.use(express_import_routes());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -68,4 +68,4 @@ app.listen(PORT, (err) => {
   }
 });
 
-module.exports = app
+module.exports = app;

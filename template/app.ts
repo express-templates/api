@@ -15,7 +15,7 @@ import bodyParser from "body-parser";
 {{#if_xor cookieparser extraction "extraction"}}
 import cookieParser from "cookie-parser";
 {{/if_xor}}
-import routes from "express-import-routes";
+import express_import_routes from "express-import-routes";
 {{#if_xor axios extraction "extraction"}}
 import alias from "module-alias";
 {{/if_xor}}
@@ -54,7 +54,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 {{/if_xor}}
-app.use(routes())
+app.use(express_import_routes());
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -77,4 +77,4 @@ app.listen(PORT, (err?: any): void => {
   }
 });
 
-export default app
+export default app;
