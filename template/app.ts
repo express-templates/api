@@ -1,5 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import createError from "http-errors";
+import chalk from "chalk";
 {{#morgan}}
 import morgan from "morgan";
 {{/morgan}}
@@ -22,7 +23,6 @@ import alias from "module-alias";
 import dotenv from "dotenv";
 {{#if_eq database "mongoose"}}
 import db from "./db";
-import chalk from "chalk";
 {{/if_eq}}
 
 {{#if_xor axios extraction "extraction"}}

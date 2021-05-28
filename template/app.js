@@ -1,5 +1,6 @@
 const express = require("express");
 const createError = require("http-errors");
+const chalk = require("chalk");
 {{#morgan}}
 const morgan = require("morgan");
 {{/morgan}}
@@ -19,7 +20,6 @@ alias.addAlias("@axios", `${__dirname}/axios.js`);
 {{/if_xor}}
 {{#if_eq database "mongoose"}}
 const db = require("./db");
-const chalk = require("chalk");
 
 db.connect().then(() => {
   console.log(chalk.blue("MongoDB connected!"));
