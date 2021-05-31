@@ -85,7 +85,7 @@
     "@types/cors": "^2.8.10",
     {{/if_xor}}
     "@types/express": "^4.17.11",
-    "@types/http-errors": "^1.8.0"
+    "@types/http-errors": "^1.8.0",
     "@types/dotenv": "^8.2.0",
     "@types/node": "^15.0.1",
     "@types/mocha": "^8.2.2",
