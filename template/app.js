@@ -10,9 +10,6 @@ const helmet = require("helmet");
 {{#if_xor cors extraction "extraction"}}
 const cors = require("cors");
 {{/if_xor}}
-{{#if_xor bodyparser extraction "extraction"}}
-const bodyParser = require("body-parser");
-{{/if_xor}}
 const express_import_routes = require("express-import-routes");
 {{#if_xor axios extraction "extraction"}}
 const alias = require("module-alias");
@@ -29,6 +26,8 @@ require("dotenv").config();
 
 const app = express();
 
+const debug = require("debug")("api:server");
+
 {{#morgan}}
 app.use(morgan("dev"));
 {{/morgan}}
@@ -41,10 +40,8 @@ app.use(cors());
 {{#if_xor cookieparser extraction "extraction"}}
 app.use(require("cookie-parser")());
 {{/if_xor}}
-{{#if_xor bodyparser extraction "extraction"}}
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-{{/if_xor}}
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express_import_routes());
 
 // catch 404 and forward to error handler
@@ -64,7 +61,7 @@ app.listen(PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log(`App it running on port ${PORT}`);
+    debug(`App it running on port ${PORT}`);
   }
 });
 

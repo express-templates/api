@@ -88,11 +88,6 @@ module.exports = {
       type: "confirm",
       message: "Install cors?",
     },
-    bodyparser: {
-      when: "extraction !== 'extraction'",
-      type: "confirm",
-      message: "Install body-parser?",
-    },
     cookieparser: {
       when: "extraction !== 'extraction'",
       type: "confirm",
