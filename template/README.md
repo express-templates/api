@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-{{if_eq autoInstall "yarn"}}
+{{#if_eq autoInstall "yarn"}}
 # install dependencies
 yarn install
 
@@ -28,8 +28,9 @@ yarn e2e
 
 # run all tests
 yarn test
+{{/if_or}}
 {{/if_eq}}
-{{if_ne autoInstall "yarn"}}
+{{#if_ne autoInstall "yarn"}}
 # install dependencies
 npm install
 
@@ -52,6 +53,6 @@ npm run e2e
 
 # run all tests
 npm test
-{{/if_eq}}
 {{/if_or}}
+{{/if_ne}}
 ```
