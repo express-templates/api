@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error(chalk.red(err.message));
   res.end("Error");
 });

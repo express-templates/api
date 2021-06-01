@@ -55,12 +55,12 @@ app.use(express.json());
 app.use(express_import_routes());
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction): void => {
   next(createError(404));
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction): void => {
   console.error(chalk.red(err.message));
   res.end("Error");
 });
