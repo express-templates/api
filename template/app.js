@@ -22,8 +22,6 @@ require("dotenv").config();
 
 const app = express();
 
-const debug = require("debug")("api:server");
-
 app.use(morgan("dev"));
 app.use(helmet());
 {{#if_xor cors extraction "extraction"}}
@@ -53,7 +51,7 @@ app.listen(PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    debug(`App it running on port ${PORT}`);
+    console.log(`App it running on port ${PORT}`);
   }
 });
 

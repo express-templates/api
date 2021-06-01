@@ -1,7 +1,6 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import createError from "http-errors";
 import chalk from "chalk";
-import debug from "debug";
 import morgan from "morgan";
 import helmet from "helmet";
 {{#if_xor cors extraction "extraction"}}
@@ -32,8 +31,6 @@ dotenv.config();
 
 const app: Application = express();
 
-const debuger = debug("web:server");
-
 app.use(morgan("dev"));
 app.use(helmet());
 {{#if_xor cors extraction "extraction"}}
@@ -63,7 +60,7 @@ app.listen(PORT, (err?: any): void => {
   if (err) {
     console.error(err);
   } else {
-    debuger(`⚡️App it running on port ${PORT}`);
+    console.log(`⚡️App it running on port ${PORT}`);
   }
 });
 
