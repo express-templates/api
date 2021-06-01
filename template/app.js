@@ -1,12 +1,8 @@
 const express = require("express");
 const createError = require("http-errors");
 const chalk = require("chalk");
-{{#morgan}}
 const morgan = require("morgan");
-{{/morgan}}
-{{#helmet}}
 const helmet = require("helmet");
-{{/helmet}}
 {{#if_xor cors extraction "extraction"}}
 const cors = require("cors");
 {{/if_xor}}
@@ -28,12 +24,8 @@ const app = express();
 
 const debug = require("debug")("api:server");
 
-{{#morgan}}
 app.use(morgan("dev"));
-{{/morgan}}
-{{#helmet}}
 app.use(helmet());
-{{/helmet}}
 {{#if_xor cors extraction "extraction"}}
 app.use(cors());
 {{/if_xor}}

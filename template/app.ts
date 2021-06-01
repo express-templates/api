@@ -2,12 +2,8 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import createError from "http-errors";
 import chalk from "chalk";
 import debug from "debug";
-{{#morgan}}
 import morgan from "morgan";
-{{/morgan}}
-{{#helmet}}
 import helmet from "helmet";
-{{/helmet}}
 {{#if_xor cors extraction "extraction"}}
 import cors from "cors";
 {{/if_xor}}
@@ -38,12 +34,8 @@ const app: Application = express();
 
 const debuger = debug("web:server");
 
-{{#morgan}}
 app.use(morgan("dev"));
-{{/morgan}}
-{{#helmet}}
 app.use(helmet());
-{{/helmet}}
 {{#if_xor cors extraction "extraction"}}
 app.use(cors());
 {{/if_xor}}

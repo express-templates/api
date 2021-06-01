@@ -58,14 +58,7 @@ module.exports = {
     ts: {
       type: "confirm",
       message: "Use TypeScript?",
-    },
-    morgan: {
-      type: "confirm",
-      message: "Install morgan?",
-    },
-    helmet: {
-      type: "confirm",
-      message: "Install helmet?",
+      default: false,
     },
     extraction: {
       type: "list",

@@ -49,7 +49,7 @@ exports.installDependencies = function installDependencies(
  * Prints the final message with instructions of necessary next steps.
  * @param {Object} data Data from questionnaire.
  */
-exports.printMessage = function printMessage(data, { green, yellow }) {
+exports.printMessage = function printMessage(data, { green, yellow }, isYarn = false) {
   const message = `
 # ${green("Project initialization finished!")}
 # ========================
@@ -59,7 +59,7 @@ To get started:
   ${yellow(
     `${data.inPlace ? "" : `cd ${data.destDirName}\n  `}${installMsg(
       data
-    )}${lintMsg(data)}npm run dev`
+    )}${lintMsg(data)}${isYarn ? "yarn dev" : "npm run dev"}`
   )}
   
 `;
