@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     {{#ts}}
-    "start": "ts-node app.ts",
+    "start": "etsc && node ./dist/index.js",
     "dev": "nodemon app.ts",
     {{/ts}}
     {{#if_eq ts false}}
@@ -13,7 +13,7 @@
     "dev": "nodemon app.js",
     {{/if_eq}}
     {{#ts}}
-    "build": "tsc --project ./",
+    "build": "etsc",
     {{/ts}}
     "lint": "eslint --fix",
     "test": "mocha --exit"
@@ -55,6 +55,7 @@
     "mocha": "^8.2.2",
     "supertest": "^6.1.3",
     {{#ts}}
+    "esbuild-node-tsc": "^1.7.0",
     {{#if_xor cookieparser extraction "extraction"}}
     "@types/cookie-parser": "^1.4.2",
     {{/if_xor}}
@@ -81,8 +82,6 @@
     "@types/node": "^15.0.1",
     "@types/mocha": "^8.2.2",
     "@types/supertest": "^2.0.11",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
     {{/ts}}
     "nodemon": "^2.0.7"
   }

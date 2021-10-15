@@ -65,7 +65,7 @@ module.exports = {
     ts: {
       type: "confirm",
       message: "Use TypeScript?",
-      default: false,
+      default: true,
     },
     extraction: {
       type: "list",

@@ -1,0 +1,12 @@
+{
+   "watch": ["src"],
+   "ignore": ["src/**/*.test.ts"],
+   "ext": "ts,mjs,js,json,graphql",
+   {{#ts}}
+   "exec": "etsc && node ./dist/index.js",
+   {{/ts}}
+   {{#if_eq ts false}}
+   "exec": "node ./src/index.js",
+   {{/if_eq}}
+   "legacyWatch": true
+ }
