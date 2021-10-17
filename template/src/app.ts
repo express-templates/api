@@ -54,6 +54,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction): void => {
   res.end("Error");
 });
 
+app.use(express.static(path.join(__dirname, "..", "public")));
+
 const PORT: number = +(process.env.PORT || 3000);
 
 app.listen(PORT, (err?: any): void => {
