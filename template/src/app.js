@@ -19,6 +19,7 @@ db.connect().then(() => {
 });
 {{/if_eq}}
 require("dotenv").config();
+require("express-import-routes").setSrcRoot(__dirname);
 
 const app = express();
 

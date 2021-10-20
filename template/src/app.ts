@@ -9,7 +9,7 @@ import cors from "cors";
 {{#if_xor cookieparser extraction "extraction"}}
 import cookieParser from "cookie-parser";
 {{/if_xor}}
-import express_import_routes from "express-import-routes";
+import express_import_routes, { setSrcRoot } from "express-import-routes";
 {{#if_xor axios extraction "extraction"}}
 import alias from "module-alias";
 {{/if_xor}}
@@ -28,6 +28,7 @@ db.connect().then(() => {
 });
 {{/if_eq}}
 dotenv.config();
+setSrcRoot(__dirname);
 
 const app: Application = express();
 
