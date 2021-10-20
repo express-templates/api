@@ -3,6 +3,7 @@ const createError = require("http-errors");
 const chalk = require("chalk");
 const morgan = require("morgan");
 const helmet = require("helmet");
+const path = require("path")
 {{#if_xor cors extraction "extraction"}}
 const cors = require("cors");
 {{/if_xor}}

@@ -3,6 +3,7 @@ import createError from "http-errors";
 import chalk from "chalk";
 import morgan from "morgan";
 import helmet from "helmet";
+import path from "path";
 {{#if_xor cors extraction "extraction"}}
 import cors from "cors";
 {{/if_xor}}
