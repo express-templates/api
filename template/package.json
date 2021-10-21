@@ -2,7 +2,12 @@
   "name": "{{ name }}",
   "version": "1.0.0",
   "description": "{{ description }}",
-  "main": "app.js",
+  {{#ts}}
+  "main": "./dist/app.js",
+  {{/ts}}
+  {{#if_eq ts false}}
+  "main": "./src/app.js",
+  {{/if_eq}}
   "scripts": {
     {{#ts}}
     "start": "etsc && node ./dist/index.js",
@@ -29,6 +34,7 @@
     "http-errors": "^1.8.0",
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
+    "module-alias": "^2.2.2",
     {{#if_eq database "mongoose"}}
     "mongoose": "^5.12.5",
     {{/if_eq}}
@@ -38,7 +44,6 @@
     {{#if_xor axios extraction "extraction"}}
     "axios": "^0.21.1",
     "axios-cache-adapter": "^2.7.3",
-    "module-alias": "^2.2.2",
     {{/if_xor}}
     {{#if_xor jsdom extraction "extraction"}}
     "jsdom": "^16.5.3",
@@ -84,7 +89,10 @@
     "@types/dotenv": "^8.2.0",
     "@types/node": "^15.0.1",
     "@types/mocha": "^9.0.0",
+    "@types/module-alias": "^2.0.1",
     "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
     {{/ts}}
     "nodemon": "^2.0.7"
   }

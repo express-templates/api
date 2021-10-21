@@ -1,29 +1,27 @@
-import express, { Application, NextFunction, Request, Response } from "express";
-import createError from "http-errors";
-import chalk from "chalk";
-import morgan from "morgan";
-import helmet from "helmet";
 import path from "path";
-{{#if_xor cors extraction "extraction"}}
-import cors from "cors";
-{{/if_xor}}
+
+import chalk from "chalk";
 {{#if_xor cookieparser extraction "extraction"}}
 import cookieParser from "cookie-parser";
 {{/if_xor}}
-import express_import_routes, { setSrcRoot } from "express-import-routes";
-{{#if_xor axios extraction "extraction"}}
-import alias from "module-alias";
+{{#if_xor cors extraction "extraction"}}
+import cors from "cors";
 {{/if_xor}}
 import dotenv from "dotenv";
+import express, { Application, NextFunction, Request, Response } from "express";
+import express_import_routes, { setSrcRoot } from "express-import-routes";
+import helmet from "helmet";
+import createError from "http-errors";
+import alias from "module-alias";
+import morgan from "morgan";
+
 {{#if_eq database "mongoose"}}
 import db from "./db";
 {{/if_eq}}
 
-{{#if_xor axios extraction "extraction"}}
-alias.addAlias("@axios", `${__dirname}/axios.js`);
-{{/if_xor}}
-
+alias.addAlias("src", __dirname);
 {{#if_eq database "mongoose"}}
+
 db.connect().then(() => {
   console.log(chalk.blue("MongoDB connected!"));
 });

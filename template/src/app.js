@@ -8,10 +8,8 @@ const path = require("path")
 const cors = require("cors");
 {{/if_xor}}
 const express_import_routes = require("express-import-routes");
-{{#if_xor axios extraction "extraction"}}
 const alias = require("module-alias");
-alias.addAlias("@axios", `${__dirname}/axios.js`);
-{{/if_xor}}
+alias.addAlias("src", __dirname);
 {{#if_eq database "mongoose"}}
 const db = require("./db");
 

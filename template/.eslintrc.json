@@ -1,5 +1,8 @@
 {
   "root": true,
+  {{#ts}}
+  "parser": "@typescript-eslint/parser",
+  {{/ts}}
   "ignorePatterns": [
     "node_modules",
     "build",
@@ -9,14 +12,23 @@
     "import",
     "eslint-comments",
     "functional",
+    {{#ts}}
+    "@typescript-eslint",
+    {{/ts}}
     "mocha"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:eslint-comments/recommended",
+    {{#ts}}
+    "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript",
+    {{/ts}}
     "plugin:functional/lite",
     "prettier",
+    {{#ts}}
+    "prettier/@typescript-eslint",
+    {{/ts}}
     "plugin:mocha/recommended"
   ],
   "env": {
@@ -25,9 +37,13 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 12
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
   "rules": {
+    {{#ts}}
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    {{/ts}}
     "eslint-comments/disable-enable-pair": [
       "error",
       {

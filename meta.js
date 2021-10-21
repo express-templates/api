@@ -198,15 +198,14 @@ module.exports = {
     },
   },
   filters: {
-    "db.*": "useDatabase",
-    "axios.*": "extraction === 'extraction' || axios",
-    "utils/index.*": "extraction === 'extraction' || jsdom",
+    "src/db.*": "useDatabase",
+    "src/axios.*": "extraction === 'extraction' || axios",
+    "src/utils/index.*": "extraction === 'extraction' || jsdom",
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
-    "typings/*": "ts",
-    "models/*": 'useDatabase && database === "mongoose"',
-    "schema/*": 'useDatabase && database === "mongoose"',
+    "src/models/*": 'useDatabase && database === "mongoose"',
+    "src/schema/*": 'useDatabase && database === "mongoose"',
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;

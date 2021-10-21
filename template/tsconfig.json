@@ -9,9 +9,11 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "rootDir": "./",
-    "outDir": "./dist",
-    "esModuleInterop": true
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "src"
