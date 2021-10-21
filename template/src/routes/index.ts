@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-export const get = (req: Request, res: Response): void => {
+export function get(req: Request, res: Response): void {
   res.json({
-    message: "Hello expressjs",
+    message: "Hello express.js",
   });
 };
