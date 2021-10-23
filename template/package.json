@@ -89,6 +89,6 @@
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
     {{/ts}}
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.14"
   }
 }
