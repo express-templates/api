@@ -42,7 +42,7 @@
     "mysql": "^2.18.1",
     {{/if_eq}}
     {{#if_xor axios extraction "extraction"}}
-    "axios": "^0.21.1",
+    "axios": "^0.23.0",
     "axios-cache-adapter": "^2.7.3",
     {{/if_xor}}
     {{#if_xor jsdom extraction "extraction"}}
@@ -70,9 +70,6 @@
     {{#if_xor jsdom extraction "extraction"}}
     "@types/jsdom": "^16.2.10",
     {{/if_xor}}
-    {{#if_xor axios extraction "extraction"}}
-    "@types/axios": "^0.14.0",
-    {{/if_xor}}
     {{#if_eq database "mysql"}}
     "@types/mysql": "^2.15.18",
     {{/if_eq}}
@@ -80,13 +77,11 @@
     "@types/mongoose": "^5.10.5",
     {{/if_eq}}
     "@types/morgan": "^1.9.2",
-    "@types/helmet": "^4.0.0",
     {{#if_xor cors extraction "extraction"}}
     "@types/cors": "^2.8.10",
     {{/if_xor}}
     "@types/express": "^4.17.11",
     "@types/http-errors": "^1.8.0",
-    "@types/dotenv": "^8.2.0",
     "@types/node": "^15.0.1",
     "@types/mocha": "^9.0.0",
     "@types/module-alias": "^2.0.1",
