@@ -3,10 +3,10 @@ const createError = require("http-errors");
 const chalk = require("chalk");
 const morgan = require("morgan");
 const helmet = require("helmet");
-const path = require("path")
-{{#if_xor cors extraction "extraction"}}
+const path = require("path");
+{{#if_in packages "cors"}}
 const cors = require("cors");
-{{/if_xor}}
+{{/if_in}}
 const express_import_routes = require("express-import-routes");
 const alias = require("module-alias");
 alias.addAlias("src", __dirname);
@@ -24,9 +24,9 @@ const app = express();
 
 app.use(morgan("dev"));
 app.use(helmet());
-{{#if_xor cors extraction "extraction"}}
+{{#if_in packages "cors"}}
 app.use(cors());
-{{/if_xor}}
+{{/if_in}}
 app.use(require("cookie-parser")());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

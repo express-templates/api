@@ -26,28 +26,28 @@
   "author": "{{ author }}",
   "license": "MIT",
   "dependencies": {
-    {{#if_xor cors extraction "extraction"}}
-    "cors": "^2.8.5",
-    {{/if_xor}}
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
     "module-alias": "^2.2.2",
+    {{#if_in packages "cors"}}
+    "cors": "^2.8.5",
+    {{/if_in}}
     {{#if_eq database "mongoose"}}
     "mongoose": "^5.12.5",
     {{/if_eq}}
     {{#if_eq database "mysql"}}
     "mysql": "^2.18.1",
     {{/if_eq}}
-    {{#if_xor axios extraction "extraction"}}
+    {{#if_in packages "axios"}}
     "axios": "^0.23.0",
     "axios-cache-adapter": "^2.7.3",
-    {{/if_xor}}
-    {{#if_xor jsdom extraction "extraction"}}
+    {{/if_in}}
+    {{#if_in packages "jsdom"}}
     "jsdom": "^16.5.3",
-    {{/if_xor}}
+    {{/if_in}}
     "cookie-parser": "^1.4.5",
     "express-import-routes": "^0.0.4-b1"
   },
@@ -62,20 +62,6 @@
     "supertest": "^6.1.6",
     {{#ts}}
     "esbuild-node-tsc": "^1.7.0",
-    "@types/cookie-parser": "^1.4.2",
-    {{#if_xor jsdom extraction "extraction"}}
-    "@types/jsdom": "^16.2.10",
-    {{/if_xor}}
-    {{#if_eq database "mysql"}}
-    "@types/mysql": "^2.15.18",
-    {{/if_eq}}
-    {{#if_eq database "mongoose"}}
-    "@types/mongoose": "^5.10.5",
-    {{/if_eq}}
-    "@types/morgan": "^1.9.2",
-    {{#if_xor cors extraction "extraction"}}
-    "@types/cors": "^2.8.10",
-    {{/if_xor}}
     "@types/express": "^4.17.11",
     "@types/http-errors": "^1.8.0",
     "@types/node": "^15.0.1",
@@ -84,6 +70,20 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.1.0",
     "@typescript-eslint/parser": "^5.1.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/morgan": "^1.9.2",
+    {{#if_in packages "jsdom"}}
+    "@types/jsdom": "^16.2.10",
+    {{/if_in}}
+    {{#if_in packages "cors"}}
+    "@types/cors": "^2.8.10",
+    {{/if_in}}
+    {{#if_eq database "mysql"}}
+    "@types/mysql": "^2.15.18",
+    {{/if_eq}}
+    {{#if_eq database "mongoose"}}
+    "@types/mongoose": "^5.10.5",
+    {{/if_eq}}
     {{/ts}}
     "nodemon": "^2.0.14"
   }

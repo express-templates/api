@@ -2,9 +2,9 @@ import path from "path";
 
 import chalk from "chalk";
 import cookieParser from "cookie-parser";
-{{#if_xor cors extraction "extraction"}}
+{{#if_in packages "cors"}}
 import cors from "cors";
-{{/if_xor}}
+{{/if_in}}
 import dotenv from "dotenv";
 import express, { Application, NextFunction, Request, Response } from "express";
 import express_import_routes, { setSrcRoot } from "express-import-routes";
@@ -31,9 +31,9 @@ const app: Application = express();
 
 app.use(morgan("dev"));
 app.use(helmet());
-{{#if_xor cors extraction "extraction"}}
+{{#if_in packages "cors"}}
 app.use(cors());
-{{/if_xor}}
+{{/if_in}}
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

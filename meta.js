@@ -41,6 +41,13 @@ module.exports = {
 
       return options.inverse(this);
     },
+    if_in(v1, v2, options) {
+      if (v1.includes(v2)) {
+        return options.fn(this);
+      }
+
+      return options.inverse(this);
+    },
     template_version() {
       return templateVersion;
     },
@@ -67,49 +74,32 @@ module.exports = {
       message: "Use TypeScript?",
       default: true,
     },
-    extraction: {
-      type: "list",
-      message: "Pick an mode API",
+    packages: {
+      type: "checkbox",
+      message: "Select packages install:",
       choices: [
         {
-          name: "Normal API",
-          value: "normal",
-          short: "normal",
+          name: "Cors",
+          value: "cors",
         },
         {
-          name: "Data extraction API",
-          value: "extraction",
-          short: "extraction",
+          name: "Axios",
+          value: "axios",
+        },
+        {
+          name: "JSDom",
+          value: "jsdom",
         },
       ],
     },
-    cors: {
-      when: "extraction !== 'extraction'",
-      type: "confirm",
-      message: "Install cors?",
-    },
-    axios: {
-      when: "extraction !== 'extraction'",
-      type: "confirm",
-      message: "Install axios?",
-      default: false,
-    },
-    jsdom: {
-      when: "extraction !== 'extraction'",
-      type: "confirm",
-      message: "Install jsdom?",
-      default: false,
-    },
-    useDatabase: {
-      type: "confirm",
-      message: "Use database?",
-      default: false,
-    },
     database: {
-      when: "useDatabase",
       type: "list",
       message: "Pick an database preset",
       choices: [
+        {
+          name: "None",
+          value: null,
+        },
         {
           name: "MySQL",
           value: "mysql",
@@ -123,47 +113,47 @@ module.exports = {
       ],
     },
     DB_MG_URL: {
-      when: "useDatabase && database == 'mongoose'",
+      when: "database == 'mongoose'",
       type: "string",
       required: true,
       message: "Mongo Database connect?",
       default: "mongodb://localhost:27017",
     },
     DB_MG_NAME: {
-      when: "useDatabase && database == 'mongoose'",
+      when: "database == 'mongoose'",
       type: "string",
       required: true,
       message: "Mongo Database name?",
     },
     DB_DATABASE: {
-      when: "useDatabase && database == 'mysql'",
+      when: "database == 'mysql'",
       type: "string",
       required: true,
       message: "Database name?",
     },
     DB_HOST: {
-      when: "useDatabase && database == 'mysql'",
+      when: "database == 'mysql'",
       type: "string",
       required: true,
       message: "Host database name?",
       default: "localhost",
     },
     DB_USER: {
-      when: "useDatabase && database == 'mysql'",
+      when: "database == 'mysql'",
       type: "string",
       required: true,
       message: "Username database name?",
       default: "root",
     },
     DB_PASSWORD: {
-      when: "useDatabase && database == 'mysql'",
+      when: "database == 'mysql'",
       type: "password",
       required: false,
       message: "Password database?",
       default: "",
     },
     DB_TIMEOUT: {
-      when: "useDatabase && database == 'mysql'",
+      when: "database == 'mysql'",
       type: "number",
       required: true,
       message: "Timeout query database?",
@@ -193,14 +183,14 @@ module.exports = {
     },
   },
   filters: {
-    "src/db.*": "useDatabase",
-    "src/axios.*": "extraction === 'extraction' || axios",
-    "src/utils/index.*": "extraction === 'extraction' || jsdom",
+    "src/db.*": "useDatabase !== null",
+    "src/axios.*": "packages.includes('axios')",
+    "src/utils/index.*": "packages.includes('jsdom')",
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
-    "src/models/*": 'useDatabase && database === "mongoose"',
-    "src/schema/*": 'useDatabase && database === "mongoose"',
+    "src/models/*": 'database === "mongoose"',
+    "src/schema/*": 'database === "mongoose"',
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
