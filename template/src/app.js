@@ -27,9 +27,7 @@ app.use(helmet());
 {{#if_xor cors extraction "extraction"}}
 app.use(cors());
 {{/if_xor}}
-{{#if_xor cookieparser extraction "extraction"}}
 app.use(require("cookie-parser")());
-{{/if_xor}}
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express_import_routes());

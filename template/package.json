@@ -48,9 +48,7 @@
     {{#if_xor jsdom extraction "extraction"}}
     "jsdom": "^16.5.3",
     {{/if_xor}}
-    {{#if_xor cookieparser extraction "extraction"}}
     "cookie-parser": "^1.4.5",
-    {{/if_xor}}
     "express-import-routes": "^0.0.4-b1"
   },
   "devDependencies": {
@@ -64,9 +62,7 @@
     "supertest": "^6.1.6",
     {{#ts}}
     "esbuild-node-tsc": "^1.7.0",
-    {{#if_xor cookieparser extraction "extraction"}}
     "@types/cookie-parser": "^1.4.2",
-    {{/if_xor}}
     {{#if_xor jsdom extraction "extraction"}}
     "@types/jsdom": "^16.2.10",
     {{/if_xor}}

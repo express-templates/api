@@ -1,9 +1,7 @@
 import path from "path";
 
 import chalk from "chalk";
-{{#if_xor cookieparser extraction "extraction"}}
 import cookieParser from "cookie-parser";
-{{/if_xor}}
 {{#if_xor cors extraction "extraction"}}
 import cors from "cors";
 {{/if_xor}}
@@ -17,8 +15,8 @@ import morgan from "morgan";
 
 {{#if_eq database "mongoose"}}
 import db from "./db";
-{{/if_eq}}
 
+{{/if_eq}}
 alias.addAlias("src", __dirname);
 {{#if_eq database "mongoose"}}
 
@@ -36,9 +34,7 @@ app.use(helmet());
 {{#if_xor cors extraction "extraction"}}
 app.use(cors());
 {{/if_xor}}
-{{#if_xor cookieparser extraction "extraction"}}
 app.use(cookieParser());
-{{/if_xor}}
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express_import_routes());

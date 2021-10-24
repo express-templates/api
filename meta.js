@@ -88,11 +88,6 @@ module.exports = {
       type: "confirm",
       message: "Install cors?",
     },
-    cookieparser: {
-      when: "extraction !== 'extraction'",
-      type: "confirm",
-      message: "Install cookie-parser?",
-    },
     axios: {
       when: "extraction !== 'extraction'",
       type: "confirm",
