@@ -42,7 +42,7 @@ module.exports = {
       return options.inverse(this);
     },
     if_in(v1, v2, options) {
-      if (v1.includes(v2)) {
+      if (v2 in v1) {
         return options.fn(this);
       }
 
@@ -183,9 +183,9 @@ module.exports = {
     },
   },
   filters: {
-    "src/db.*": "useDatabase !== null",
-    "src/axios.*": "packages.includes('axios')",
-    "src/utils/index.*": "packages.includes('jsdom')",
+    "src/db.*": "database !== null",
+    "src/axios.*": "'axios' in packages",
+    "src/utils/index.*": "'jsdom' in packages",
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
