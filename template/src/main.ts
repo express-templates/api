@@ -2,6 +2,7 @@ import { createApp } from "express-fw";
 import path from "path";
 import chalk from "chalk";
 import express, { Request, Response, NextFunction } from "express";
+import createError from "http-errors";
 
 const app = createApp();
 

@@ -5,7 +5,6 @@ import express from "express";
 import cors from "cors";
 {{/if_in}} 
 import helmet from "helmet";
-import createError from "http-errors";
 import alias from "module-alias";
 import morgan from "morgan";
 
