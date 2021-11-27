@@ -5,11 +5,6 @@ import express from "express";
 
 const app = createApp();
 
-// catch 404 and forward to error handler
-app.use((req, res, next): void => {
-  next(createError(404));
-});
-
 // error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err, req, res, next): void => {
