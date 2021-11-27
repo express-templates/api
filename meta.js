@@ -183,14 +183,10 @@ module.exports = {
     },
   },
   filters: {
-    "src/db.*": "database !== null",
-    "src/axios.*": "'axios' in packages",
-    "src/utils/index.*": "'jsdom' in packages",
+    "src/boot/database.*": "database !== null",
     "tsconfig.json": "ts",
     "**/*.js": "ts === false",
     "**/*.ts": "ts",
-    "src/models/*": 'database === "mongoose"',
-    "src/schema/*": 'database === "mongoose"',
   },
   complete: function (data, { chalk }) {
     const green = chalk.green;
