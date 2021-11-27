@@ -1,6 +1,7 @@
 import { createApp } from "express-fw";
 import path from "path";
 import chalk from "chalk";
+import express from "express";
 
 const app = createApp();
 
