@@ -1,5 +1,6 @@
 {{#if_eq database "mysql"}}
 import mysql from "mysql";
+import chalk from "chalk";
 import { Connection, Query, QueryOptions, MysqlError } from "mysql";
 
 interface QueryResult {
@@ -95,7 +96,7 @@ export const query = async (options: string|QueryOptions|Query, params?: any): P
 import mongoose from "mongoose";
 import { MongoClient } from "mongoose";
 
-export const connect = async (): MongoClient => {
+const connect = async (): MongoClient => {
   return await mongoose.connect("{{ DB_MG_URL }}/{{ DB_MG_NAME }}", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -103,4 +104,7 @@ export const connect = async (): MongoClient => {
     useCreateIndex: true,
   });
 };
+connect().then(() => {
+  console.log(chalk.blue("MongoDB connected!"));
+});
 {{/if_eq}}

@@ -1,5 +1,6 @@
 {{#if_eq database "mysql"}}
 const mysql = require("mysql");
+const chalk = require("chalk");
 
 function mergeOptions(options, defaults) {
   if (options === null || typeof options !== "object") {
@@ -84,7 +85,7 @@ exports.query = async (options, params) => {
 {{#if_eq database "mongoose"}}
 const mongoose = require("mongoose")
 
-exports.connect = async () => {
+connect = async () => {
   return await mongoose.connect("{{ DB_MG_URL }}/{{ DB_MG_NAME }}", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -92,4 +93,7 @@ exports.connect = async () => {
     useCreateIndex: true,
   });
 };
+connect().then(() => {
+  console.log(chalk.blue("MongoDB connected!"));
+});
 {{/if_eq}}

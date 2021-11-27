@@ -1,7 +1,10 @@
-import { Request, Response } from "express";
+import { router } from "express-fw";
 
-export function get(req: Request, res: Response): void {
-  res.json({
-    message: "Hello express.js",
-  });
-};
+export default router({
+  get(req, res) {
+    res.json({
+      message: "Hello expressjs",
+    });
+  },
+});
+ 

@@ -3,23 +3,15 @@
   "version": "1.0.0",
   "description": "{{ description }}",
   {{#ts}}
-  "main": "./dist/app.js",
+  "main": "./src/main.ts",
   {{/ts}}
   {{#if_eq ts false}}
-  "main": "./src/app.js",
+  "main": "./src/main.js",
   {{/if_eq}}
   "scripts": {
-    {{#ts}}
-    "start": "etsc && node ./dist/index.js",
+    "start": "yarn build && node ./dist/index.js",
     "dev": "nodemon",
-    {{/ts}}
-    {{#if_eq ts false}}
-    "start": "node app.js",
-    "dev": "nodemon",
-    {{/if_eq}}
-    {{#ts}}
     "build": "etsc",
-    {{/ts}}
     "lint": "eslint --fix",
     "test": "mocha --exit"
   },
@@ -31,7 +23,6 @@
     "http-errors": "^1.8.0",
     "helmet": "^4.4.1",
     "morgan": "^1.10.0",
-    "module-alias": "^2.2.2",
     {{#if_in packages "cors"}}
     "cors": "^2.8.5",
     {{/if_in}}
@@ -43,13 +34,12 @@
     {{/if_eq}}
     {{#if_in packages "axios"}}
     "axios": "^0.23.0",
-    "axios-cache-adapter": "^2.7.3",
     {{/if_in}}
     {{#if_in packages "jsdom"}}
     "jsdom": "^16.5.3",
     {{/if_in}}
     "cookie-parser": "^1.4.5",
-    "express-import-routes": "^0.0.4-b1"
+    "express-fw": "^0.0.2"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -85,6 +75,7 @@
     "@types/mongoose": "^5.10.5",
     {{/if_eq}}
     {{/ts}}
-    "nodemon": "^2.0.14"
+    "nodemon": "^2.0.14",
+    "esno": "^0.12.1"
   }
 }
