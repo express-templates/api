@@ -39,7 +39,7 @@
     "jsdom": "^16.5.3",
     {{/if_in}}
     "cookie-parser": "^1.4.5",
-    "express-fw": "^0.0.3"
+    "express-fw": "^0.0.4"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
